@@ -28,22 +28,77 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		// Replace the following statement with your code
-		return false;
-	}
-	   
-	// Returns a preprocessed version of the given string: all the letter characters are converted
-	// to lower-case, and all the other characters are deleted, except for spaces, which are left
-	// as is. For example, the string "What? No way!" becomes "whatnoway"
+		str1=preProcessSpace(str1);
+		str2=preProcessSpace(str2);
+		if (str1.length() != str2.length()) return false;
+		int count=0;
+
+		for (int i=0; i<str1.length(); i++) {
+			for (int j = 0; j<str1.length(); j++) {
+				if(str1.charAt(i) == str2.charAt(j)){
+					str2=str2.substring(0, j)+ " "+ str2.substring(j+1);
+					count++;
+				}
+			}
+		}
+
+		if (count==str1.length()) return true;
+		else return false;
+		}
+
+	    
+	public static String preProcessSpace(String str) {
+		char c = 0;
+		String newStr = "";
+
+		for (int i=0; i< str.length(); i++) {
+			c = str.charAt(i);
+			if ((c-0)>=64&&(c-0)<=90) {
+				c = (char) (c+32);
+				newStr +=c;
+			}
+			 else if ((c-0)>=97&&(c-0)<=122)  {
+				newStr+=c;
+			 } 
+		}
+		
+		return newStr;
+	} 
+
+	
 	public static String preProcess(String str) {
-		// Replace the following statement with your code
-		return "";
+		char c = 0;
+		String newStr = "";
+
+		for (int i=0; i< str.length(); i++) {
+			c = str.charAt(i);
+			if ((c-0)>=64&&(c-0)<=90) {
+				c = (char) (c+32);
+				newStr +=c;
+			}
+			 else if ((c-0)>=97&&(c-0)<=122 || (c-0)==32)  {
+				newStr+=c;
+			 } 
+		}
+		
+		return newStr;
 	} 
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-		// Replace the following statement with your code
-		return "";
+		String newStr = "";
+		int r;
+		int i=0;
+		int strLength=str.length();
+		while (i<strLength) {
+			r=(int) (Math.random()*str.length());
+			newStr += str.charAt(r);
+
+			str = str.substring(0, r)+str.substring(r+1);
+			i++;
+			// Replace the following statement with your code
+	}
+		return newStr;
 	}
 }
